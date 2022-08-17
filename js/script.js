@@ -91,7 +91,11 @@ const displayController = (() => {
         }
         return false;
     }
-    
+
+    const checkWinner = (row, col) => {
+        return (_checkRow(row) || _checkColumn(col) || _checkDiagonal(row, col));
+    }
+
     const reset = () => {
         for(let i = 0; i <= 8; i++) {
             gameBoard.clearField(i);
@@ -101,6 +105,7 @@ const displayController = (() => {
     return {
         getPlayer1,
         getPlayer2,
+        checkWinner,
         reset
     }
 })();
