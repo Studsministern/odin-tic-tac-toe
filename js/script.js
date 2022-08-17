@@ -1,3 +1,36 @@
+const Player = (sign) => {
+    let _sign = sign;
+
+    const getSign = () => _sign;
+
+    return { getSign };
+};
+
+const gameBoard = ((_htmlBoard) => {
+    let _board = new Array(9);
+
+    const getField = index => _board[index];
+
+    const setField = (index, player) => {
+        if(_board[index] === undefined) {
+            const card = _htmlBoard.querySelector(`[data-index="${index}"]`);
+            card.textContent = player.getSign();
+            _board[index] = player.getSign();
+        }    
+    }    
+
+    const clearField = (index) => {
+        _board[index] = undefined;
+        _htmlBoard.querySelector(`[data-index="${index}"]`).remove('.winCard');
+    }    
+
+    return {
+        getField,
+        setField,
+        clearField
+    };    
+})(document.querySelector('.gameBoard'));    
+
 const displayController = (() => {
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
@@ -70,36 +103,3 @@ const displayController = (() => {
         reset
     }
 })();
-
-const gameBoard = ((_htmlBoard) => {
-    let _board = new Array(9);
-
-    const getField = index => _board[index];
-
-    const setField = (index, player) => {
-        if(_board[index] === undefined) {
-            const card = _htmlBoard.querySelector(`[data-index="${index}"]`);
-            card.textContent = player.getSign();
-            _board[index] = player.getSign();
-        }
-    }
-
-    const clearField = (index) => {
-        _board[index] = undefined;
-        _htmlBoard.querySelector(`[data-index="${index}"]`).remove('.winCard');
-    }
-
-    return {
-        getField,
-        setField,
-        clearField
-    };
-})(document.querySelector('.gameBoard'));
-
-const Player = (sign) => {
-    let _sign = sign;
-
-    const getSign = () => _sign;
-
-    return { getSign };
-};
