@@ -49,7 +49,7 @@ const displayController = (() => {
 
         if(player1Points === 3 || player2Points === 3) {
             for(let i = start; i <= end; i += step) {
-                htmlBoard.querySelector(`[index="${i}"]`).classList.add('.winCard'); // Allows styling for cards that caused a win
+                _htmlBoard.querySelector(`[data-index="${i}"]`).classList.add('.winCard'); // Allows styling for cards that caused a win
             }
             return true;
         }
@@ -77,7 +77,7 @@ const gameBoard = ((htmlBoard) => {
 
     const setField = (index, player) => {
         if(_board[index] === undefined) {
-            const card = htmlBoard.querySelector(`[index="${index}"]`);
+            const card = _htmlBoard.querySelector(`[data-index="${index}"]`);
             card.textContent = player.getSign();
             _board[index] = player.getSign();
         }
@@ -85,7 +85,7 @@ const gameBoard = ((htmlBoard) => {
 
     const clearField = (index) => {
         _board[index] = undefined;
-        htmlBoard.querySelector(`[index="${index}"]`).remove('.winCard');
+        _htmlBoard.querySelector(`[data-index="${index}"]`).remove('.winCard');
     }
 
     return {
