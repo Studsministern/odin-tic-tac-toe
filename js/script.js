@@ -5,11 +5,11 @@ const displayController = (() => {
     const getPlayer1 = () => _player1;
     const getPlayer2 = () => _player2;
 
-    const _checkRow = (row) => {
+    const _checkFields = (start, end, step) => {
         let player1Points = 0;
         let player2Points = 0;
 
-        for(let i = 3 * row; i < 3 * (row + 1); i++) {
+        for(let i = start; i <= end; i += step) {
             switch(gameBoard.getField(i)) {
                 case _player1.getSign():
                     player1Points++;
@@ -28,68 +28,24 @@ const displayController = (() => {
         return false;
     }
 
-    const _checkColumn = (col) => {
-        let player1Points = 0;
-        let player2Points = 0;
+    const _checkRow = (row) => {
+        return _checkFields(3 * row, (3 * row) + 2, 1); // Starts at the first position in a row, checking the elements in the same row
+    }
 
-        for(let i = col; i <= 8; i += 3) {
-            switch(gameBoard.getField(i)) {
-                case _player1.getSign():
-                    player1Points++;
-                    break;
-                case _player2.getSign():
-                    player2Points++;
-                    break;
-                default:
-                    return false;
-            }
-        }
-    
-        if(player1Points === 3 || player2Points === 3) {
-            return true;
-        }
-        return false;
+    const _checkColumn = (col) => {
+        return _checkFields(col, 8, 3); // Starts in one of the three columns, stepping 3 spaces means the next element in the same column
     }
 
     const _checkDiagonal = (row, col) => {
         if((row === 1 && col !== 1) || (row !== 1 && col === 1)) { // Does not have to check middle of each side. Center (row === 1 and col === 1)
             return false;                                          // is checked in the column from top left to bottom right
         }
-        let player1Points = 0;
-        let player2Points = 0;
 
-        if(row === col) { // Handles column from top left to bottom right
-            for(let i = 0; i <= 2; i++) {
-                switch(gameBoard.getField(4 * i)) { // 4 * i for index 0, 4 and 8 (top left, middle, bottom right)
-                    case _player1.getSign():
-                        player1Points++;
-                        break;
-                    case _player2.getSign():
-                        player2Points++;
-                        break;
-                    default:
-                        return false;
-                }
-            }
-        } else { // Handles column from top right to bottom left
-            for(let i = 2; i <= 6; i += 2) {
-                switch(gameBoard.getField(i)) { // Index 2, 4 and 6 (top right, middle, bottom left)
-                    case _player1.getSign():
-                        player1Points++;
-                        break;
-                    case _player2.getSign():
-                        player2Points++;
-                        break;
-                    default:
-                        return false;
-                }
-            }
+        if(row === col) {                   // Same index => Diagonal from top left to bottom right
+            return _checkFields(0, 8, 4);   // 0 = top left, 4 = middle, 8 bottom right
+        } else {                            // Different index => Diagonal from top right to bottom left
+            return _checkFields(2, 6, 2);   // 2 = top right, 4 = middle, 6 bottom left
         }
-
-        if(player1Points === 3 || player2Points === 3) {
-            return true;
-        }
-        return false;
     }
 
     const checkWinner = (row, col) => {
