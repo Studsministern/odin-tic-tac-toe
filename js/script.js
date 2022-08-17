@@ -21,7 +21,9 @@ const gameBoard = ((_htmlBoard) => {
 
     const clearField = (index) => {
         _board[index] = undefined;
-        _htmlBoard.querySelector(`[data-index="${index}"]`).remove('.winCard');
+        const card = _htmlBoard.querySelector(`[data-index="${index}"]`);
+        card.classList.remove('.winCard');
+        card.textContent = '';
     }    
 
     return {
@@ -44,6 +46,8 @@ const displayController = (() => {
                 _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1;
             });
         });
+
+        document.querySelector('button.restart').addEventListener('click', () => reset());
     })();
 
     const getPlayer1 = () => _player1;
