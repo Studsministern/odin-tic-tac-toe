@@ -40,7 +40,7 @@ const displayController = (() => {
     const _htmlBoard = document.querySelector('.gameBoard');
 
     const _init = (() => {
-        document.querySelectorAll('.gameCard').forEach(card => {
+        _htmlBoard.querySelectorAll('.gameCard').forEach(card => {
             card.addEventListener('click', () => {
                 gameBoard.setField(card.dataset.index, _currentPlayer);
                 _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1;
