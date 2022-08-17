@@ -34,12 +34,15 @@ const gameBoard = ((_htmlBoard) => {
 const displayController = (() => {
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
-    const _currentPlayer = _player1;
+    let _currentPlayer = _player1;
     const _htmlBoard = document.querySelector('.gameBoard');
 
     const _init = (() => {
         document.querySelectorAll('.gameCard').forEach(card => {
-            card.addEventListener('click', () => gameBoard.setField(card.dataset.index, _currentPlayer));
+            card.addEventListener('click', () => {
+                gameBoard.setField(card.dataset.index, _currentPlayer);
+                _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1;
+            });
         });
     })();
 
@@ -100,6 +103,7 @@ const displayController = (() => {
         for(let i = 0; i <= 8; i++) {
             gameBoard.clearField(i);
         }
+        _currentPlayer = _player1;
     }
 
     return {
