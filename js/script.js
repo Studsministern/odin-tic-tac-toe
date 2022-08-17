@@ -18,12 +18,14 @@ const displayController = (() => {
                     player2Points++;
                     break;
                 default:
-                    return null;
+                    return false;
             }
         }
 
-        if(player1Points === 3) return _player1;
-        if(player2Points === 3) return _player2;
+        if(player1Points === 3 || player2Points === 3) {
+            return true;
+        }
+        return false;
     }
 
     const _checkColumn = (col) => {
@@ -39,17 +41,19 @@ const displayController = (() => {
                     player2Points++;
                     break;
                 default:
-                    return null;
+                    return false;
             }
         }
     
-        if(player1Points === 3) return _player1;
-        if(player2Points === 3) return _player2;
+        if(player1Points === 3 || player2Points === 3) {
+            return true;
+        }
+        return false;
     }
 
     const _checkDiagonal = (row, col) => {
         if((row === 1 && col !== 1) || (row !== 1 && col === 1)) { // Does not have to check middle of each side. Center (row === 1 and col === 1)
-            return null;                                           // is checked in the column from top left to bottom right
+            return false;                                          // is checked in the column from top left to bottom right
         }
         let player1Points = 0;
         let player2Points = 0;
@@ -64,7 +68,7 @@ const displayController = (() => {
                         player2Points++;
                         break;
                     default:
-                        return null;
+                        return false;
                 }
             }
         } else { // Handles column from top right to bottom left
@@ -77,13 +81,15 @@ const displayController = (() => {
                         player2Points++;
                         break;
                     default:
-                        return null;
+                        return false;
                 }
             }
         }
 
-        if(player1Points === 3) return _player1;
-        if(player2Points === 3) return _player2;
+        if(player1Points === 3 || player2Points === 3) {
+            return true;
+        }
+        return false;
     }
     
     const reset = () => {
