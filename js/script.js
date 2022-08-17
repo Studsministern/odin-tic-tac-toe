@@ -37,6 +37,12 @@ const displayController = (() => {
     const _currentPlayer = _player1;
     const _htmlBoard = document.querySelector('.gameBoard');
 
+    const _init = (() => {
+        document.querySelectorAll('.gameCard').forEach(card => {
+            card.addEventListener('click', () => gameBoard.setField(card.dataset.index, _currentPlayer));
+        });
+    })();
+
     const getPlayer1 = () => _player1;
     const getPlayer2 = () => _player2;
 
