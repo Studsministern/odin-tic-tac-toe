@@ -1,7 +1,8 @@
 const displayController = (() => {
-    const _player1 = Player('X');
-    const _player2 = Player('O');
-    const htmlBoard = document.querySelector('.gameBoard');
+    const _player1 = Object.create(Player('X'));
+    const _player2 = Object.create(Player('O'));
+    const _currentPlayer = _player1;
+    const _htmlBoard = document.querySelector('.gameBoard');
 
     const getPlayer1 = () => _player1;
     const getPlayer2 = () => _player2;
@@ -70,7 +71,7 @@ const displayController = (() => {
     }
 })();
 
-const gameBoard = ((htmlBoard) => {
+const gameBoard = ((_htmlBoard) => {
     let _board = new Array(9);
 
     const getField = index => _board[index];
