@@ -5,27 +5,8 @@ const displayController = (() => {
     const getPlayer1 = () => _player1;
     const getPlayer2 = () => _player2;
 
-    const _checkFields = (start, end, step) => {
-        let player1Points = 0;
-        let player2Points = 0;
-
-        for(let i = start; i <= end; i += step) {
-            switch(gameBoard.getField(i)) {
-                case _player1.getSign():
-                    player1Points++;
-                    break;
-                case _player2.getSign():
-                    player2Points++;
-                    break;
-                default:
-                    return false;
-            }
-        }
-
-        if(player1Points === 3 || player2Points === 3) {
-            return true;
-        }
-        return false;
+    const checkWinner = (row, col) => {
+        return (_checkRow(row) || _checkColumn(col) || _checkDiagonal(row, col));
     }
 
     const _checkRow = (row) => {
@@ -48,8 +29,27 @@ const displayController = (() => {
         }
     }
 
-    const checkWinner = (row, col) => {
-        return (_checkRow(row) || _checkColumn(col) || _checkDiagonal(row, col));
+    const _checkFields = (start, end, step) => {
+        let player1Points = 0;
+        let player2Points = 0;
+
+        for(let i = start; i <= end; i += step) {
+            switch(gameBoard.getField(i)) {
+                case _player1.getSign():
+                    player1Points++;
+                    break;
+                case _player2.getSign():
+                    player2Points++;
+                    break;
+                default:
+                    return false;
+            }
+        }
+
+        if(player1Points === 3 || player2Points === 3) {
+            return true;
+        }
+        return false;
     }
 
     const reset = () => {
