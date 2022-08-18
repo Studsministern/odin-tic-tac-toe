@@ -1,3 +1,16 @@
+            /*****************************
+            
+                    BASIC SETTINGS:
+            
+            - Imports
+            - Variables
+            - Global reset
+
+            *****************************/
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Variables */
 :root {
     --header-height: 6rem;
     --board-gap: .5rem;
@@ -7,6 +20,7 @@
     --bg-color-secondary: rgb(236, 236, 236);
 }
 
+/* Global reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -18,6 +32,26 @@
     background: inherit;
 }
 
+
+
+            /*****************************
+            
+                  DOCUMENT STRUCTURE:
+            
+            Body
+                Header
+                    Title
+                Main
+                    Gameboard
+                        Gamecard
+                        Gamecard
+                        ...
+                    Restart button
+                Footer
+                    Author
+
+            *****************************/
+
 body {
     min-height: 100vh;
     font: 16px black Helvetica, Verdana, sans-serif;
@@ -26,6 +60,9 @@ body {
     background: var(--bg-color-main);
 }
 
+
+
+            /********** HEADER **********/
 header {
     position: absolute;
     height: var(--header-height);
@@ -37,6 +74,9 @@ header {
     font-size: calc(var(--header-height) / 2);
 }
 
+
+
+            /********** MAIN **********/
 main {
     flex: 1;
     display: flex;
@@ -52,6 +92,7 @@ main {
     gap: var(--board-gap);
 }
 
+/* gamecards */
 .gameCard {
     width: var(--card-size);
     height: var(--card-size);
@@ -64,12 +105,16 @@ main {
     font-weight: 500;
 }
 
+/* Restart button */
 button.restart {
     padding: .6rem 1.2rem;
     border-radius: calc(var(--card-size) / 6);
     background: var(--bg-color-secondary);
 }
 
+
+
+            /********** FOOTER **********/
 footer {
     position: absolute;
     height: calc(var(--header-height) * 0.75);
@@ -78,6 +123,14 @@ footer {
     justify-content: center;
     align-items: center;
 }
+
+
+
+            /*****************************
+            
+                      ELEMENTS:
+
+            *****************************/
 
 button {
     border: none;

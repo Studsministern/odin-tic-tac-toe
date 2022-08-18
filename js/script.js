@@ -1,4 +1,4 @@
-const Player = (sign) => {
+const Player = (sign) => { // Player factory function
     let _sign = sign;
 
     const getSign = () => _sign;
@@ -6,7 +6,7 @@ const Player = (sign) => {
     return { getSign };
 };
 
-const gameBoard = ((_htmlBoard) => {
+const gameBoard = ((_htmlBoard) => { // gameBoard module
     let _board = new Array(9);
 
     const getField = index => _board[index];
@@ -33,13 +33,13 @@ const gameBoard = ((_htmlBoard) => {
     };    
 })(document.querySelector('.gameBoard'));    
 
-const displayController = (() => {
+const displayController = (() => { // displayController module
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
     let _currentPlayer = _player1;
     const _htmlBoard = document.querySelector('.gameBoard');
 
-    const _init = (() => {
+    const _init = (() => { // Initiates eventListeners for cards and restart button
         _htmlBoard.querySelectorAll('.gameCard').forEach(card => {
             card.addEventListener('click', () => {
                 gameBoard.setField(card.dataset.index, _currentPlayer);
