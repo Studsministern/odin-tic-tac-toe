@@ -22,7 +22,7 @@ const gameBoard = ((_htmlBoard) => { // gameBoard module
     const clearField = (index) => {
         _board[index] = undefined;
         const card = _htmlBoard.querySelector(`[data-index="${index}"]`);
-        card.classList.remove('.winCard');
+        card.classList.remove('winCard');
         card.classList.remove('filled');
         card.textContent = '';
     }    
@@ -98,7 +98,7 @@ const displayController = (() => { // displayController module
 
         if(player1Points === 3 || player2Points === 3) {
             for(let i = start; i <= end; i += step) {
-                _htmlBoard.querySelector(`[data-index="${i}"]`).classList.add('.winCard'); // Allows styling for cards that caused a win
+                _htmlBoard.querySelector(`[data-index="${i}"]`).classList.add('winCard'); // Allows styling for cards that caused a win
             }
             return true;
         }
