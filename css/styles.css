@@ -105,11 +105,30 @@ main {
     font-weight: 500;
 }
 
+.card:hover {
+    transform: scale(1.05);
+    transition: transform .05s;
+    cursor: pointer;
+}
+
+.card:active {
+    transform: scale(1);
+}
+
 /* Restart button */
 button.restart {
     padding: .6rem 1.2rem;
     border-radius: calc(var(--card-size) / 6);
     background: var(--bg-color-secondary);
+}
+
+button.restart:hover {
+    transform: scale(1.03);
+    transition: transform .05s;
+}
+
+button.restart:active {
+    transform: scale(1);
 }
 
 
@@ -134,4 +153,5 @@ footer {
 
 button {
     border: none;
+    cursor: pointer;
 }
