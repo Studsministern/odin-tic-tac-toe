@@ -40,7 +40,7 @@ const displayController = (() => { // displayController module
     const _htmlBoard = document.querySelector('.gameBoard');
 
     const _init = (() => { // Initiates eventListeners for cards and restart button
-        _htmlBoard.querySelectorAll('.gameCard').forEach(card => {
+        _htmlBoard.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
                 gameBoard.setField(card.dataset.index, _currentPlayer);
                 _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1;

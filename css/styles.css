@@ -43,8 +43,8 @@
                     Title
                 Main
                     Gameboard
-                        Gamecard
-                        Gamecard
+                        Card
+                        Card
                         ...
                     Restart button
                 Footer
@@ -92,8 +92,8 @@ main {
     gap: var(--board-gap);
 }
 
-/* gamecards */
-.gameCard {
+/* Cards */
+.card {
     width: var(--card-size);
     height: var(--card-size);
     background: var(--bg-color-secondary);
