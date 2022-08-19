@@ -23,6 +23,7 @@ const gameBoard = ((_htmlBoard) => { // gameBoard module
         _board[index] = undefined;
         const card = _htmlBoard.querySelector(`[data-index="${index}"]`);
         card.classList.remove('.winCard');
+        card.classList.remove('filled');
         card.textContent = '';
     }    
 
@@ -44,6 +45,7 @@ const displayController = (() => { // displayController module
             card.addEventListener('click', () => {
                 gameBoard.setField(card.dataset.index, _currentPlayer);
                 _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1;
+                card.classList.add('filled');
             });
         });
 

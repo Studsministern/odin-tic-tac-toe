@@ -103,9 +103,10 @@ main {
     align-items: center;
     font-size: calc(var(--card-size) * 0.6);
     font-weight: 500;
+    cursor: default;
 }
 
-.card:hover {
+.card:hover:not(.filled) {
     transform: scale(1.05);
     transition: transform .05s;
     cursor: pointer;
