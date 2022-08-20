@@ -13,6 +13,7 @@
 /* Variables */
 :root {
     --header-height: 6rem;
+    --title-square-size: 1.2rem;
     --board-gap: .5rem;
     --card-size: 6rem;
 
@@ -72,6 +73,20 @@ header {
     align-items: center;
     padding-left: calc(var(--header-height) / 4);
     font-size: calc(var(--header-height) / 2);
+}
+
+.title {
+    display: grid;
+    grid: repeat(3, var(--title-square-size)) / repeat(3, var(--title-square-size));
+    font-size: calc(var(--title-square-size) * 0.8);
+    font-weight: bold;
+    gap: calc(var(--title-square-size) / 12);
+}
+
+.title p {
+    text-align: center;
+    background: var(--bg-color-secondary);
+    border-radius: calc(var(--title-square-size) / 6);
 }
 
 
