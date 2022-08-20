@@ -12,7 +12,7 @@
 
 /* Variables */
 :root {
-    --header-height: 6rem;
+    --header-footer-padding: 1.5rem;
     --title-square-size: 1.2rem;
     --board-gap: .5rem;
     --card-size: 6rem;
@@ -66,12 +66,11 @@ body {
             /********** HEADER **********/
 header {
     position: absolute;
-    height: var(--header-height);
     inset: 0 0 auto 0;
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    padding-left: calc(var(--header-height) / 4);
+    padding: var(--header-footer-padding) calc(var(--header-footer-padding) * 2);
     font-size: calc(var(--header-height) / 2);
 }
 
@@ -152,8 +151,8 @@ button.restart:active {
             /********** FOOTER **********/
 footer {
     position: absolute;
-    height: calc(var(--header-height) * 0.75);
     inset: auto 0 0 0;
+    padding: var(--header-footer-padding);
     display: flex;
     justify-content: center;
     align-items: center;
