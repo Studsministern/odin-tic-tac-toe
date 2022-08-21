@@ -14,6 +14,7 @@ const gameBoard = ((_htmlBoard) => { // gameBoard module
     const setField = (index, player) => {
         const card = _htmlBoard.querySelector(`[data-index="${index}"]`);
         card.textContent = player.getSign();
+        card.classList.add('filled');
         _board[index] = player.getSign();
     }    
 
@@ -46,7 +47,6 @@ const displayController = (() => { // displayController module
                 if(gameBoard.getField(card.dataset.index) === undefined) { // Checks so the card is empty
                     gameBoard.setField(card.dataset.index, _currentPlayer);
                     _switchPlayer();
-                    card.classList.add('filled');
                 }
             });
         });
