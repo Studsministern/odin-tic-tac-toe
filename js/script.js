@@ -38,13 +38,15 @@ const displayController = (() => { // displayController module
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
     let _currentPlayer = _player1;
+    const _player1Text = document.querySelector('.player1-info');
+    const _player2Text = document.querySelector('.player2-info');
     const _htmlBoard = document.querySelector('.gameBoard');
 
     const _init = (() => { // Initiates eventListeners for cards and restart button
         _htmlBoard.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
                 gameBoard.setField(card.dataset.index, _currentPlayer);
-                _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1;
+                _switchPlayer();
                 card.classList.add('filled');
             });
         });
@@ -52,6 +54,21 @@ const displayController = (() => { // displayController module
         document.querySelector('button.restart').addEventListener('click', () => reset());
     })();
 
+    const _switchPlayer = () => {
+        _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1; 
+        _updatePlayerText();
+    };
+    
+    const _updatePlayerText = () => {
+        if(_currentPlayer === _player1) {
+            _player1Text.classList.add('current');
+            _player2Text.classList.remove('current');
+        } else {
+            _player1Text.classList.remove('current');
+            _player2Text.classList.add('current');
+        }
+    }
+    
     const getPlayer1 = () => _player1;
     const getPlayer2 = () => _player2;
 
@@ -110,6 +127,7 @@ const displayController = (() => { // displayController module
             gameBoard.clearField(i);
         }
         _currentPlayer = _player1;
+        _updatePlayerText();
     }
 
     return {
