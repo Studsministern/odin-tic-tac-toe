@@ -12,11 +12,9 @@ const gameBoard = ((_htmlBoard) => { // gameBoard module
     const getField = index => _board[index];
 
     const setField = (index, player) => {
-        if(_board[index] === undefined) {
-            const card = _htmlBoard.querySelector(`[data-index="${index}"]`);
-            card.textContent = player.getSign();
-            _board[index] = player.getSign();
-        }    
+        const card = _htmlBoard.querySelector(`[data-index="${index}"]`);
+        card.textContent = player.getSign();
+        _board[index] = player.getSign();
     }    
 
     const clearField = (index) => {
@@ -45,9 +43,11 @@ const displayController = (() => { // displayController module
     const _init = (() => { // Initiates eventListeners for cards and restart button
         _htmlBoard.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
-                gameBoard.setField(card.dataset.index, _currentPlayer);
-                _switchPlayer();
-                card.classList.add('filled');
+                if(gameBoard.getField(card.dataset.index) === undefined) { // Checks so the card is empty
+                    gameBoard.setField(card.dataset.index, _currentPlayer);
+                    _switchPlayer();
+                    card.classList.add('filled');
+                }
             });
         });
 
