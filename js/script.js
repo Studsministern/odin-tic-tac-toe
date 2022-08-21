@@ -38,6 +38,7 @@ const gameBoard = ((_htmlBoard) => { // gameBoard module
 })(document.querySelector('.gameBoard'));    
 
 const displayController = (() => { // displayController module
+    let _winner;
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
     let _currentPlayer = _player1;
@@ -50,8 +51,9 @@ const displayController = (() => { // displayController module
             card.addEventListener('click', () => {
                 const index = card.dataset.index;
                 
-                if(gameBoard.setField(index, _currentPlayer)) { // Checks so something was added to the card
-                    _switchPlayer();
+                if(_winner === undefined && gameBoard.setField(index, _currentPlayer)) { // Checks so something was added to the card
+                    if(checkWinner(Math.floor(index / 3), index % 3)) _win();
+                    else                                              _switchPlayer();
                 }
             });
         });
@@ -78,7 +80,11 @@ const displayController = (() => { // displayController module
     const getPlayer2 = () => _player2;
 
     const checkWinner = (row, col) => {
-        return (_checkRow(row) || _checkColumn(col) || _checkDiagonal(row, col));
+        const rowWin = _checkRow(row);
+        const colWin = _checkColumn(col);
+        const diaWin = _checkDiagonal(row, col);
+
+        return (rowWin || colWin || diaWin);
     }
 
     const _checkRow = (row) => {
@@ -122,16 +128,24 @@ const displayController = (() => { // displayController module
             for(let i = start; i <= end; i += step) {
                 _htmlBoard.querySelector(`[data-index="${i}"]`).classList.add('winCard'); // Allows styling for cards that caused a win
             }
+            _winner = (player1Points === 3) ? _player1 : _player2;
             return true;
         }
         return false;
+    }
+
+    const _win = () => {
+        console.log(`${(_winner === _player1) ? 'Player 1' : 'Player 2'} has won!`);
+        _htmlBoard.classList.add('game-over');
     }
 
     const reset = () => {
         for(let i = 0; i <= 8; i++) {
             gameBoard.clearField(i);
         }
+        _htmlBoard.classList.remove('game-over');
         _currentPlayer = _player1;
+        _winner = undefined;
         _updatePlayerText();
     }
 

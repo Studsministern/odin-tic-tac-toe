@@ -142,7 +142,7 @@ main {
     cursor: default;
 }
 
-.card:hover:not(.filled) {
+.gameBoard:not(.game-over) > .card:hover:not(.filled) {
     transform: scale(1.05);
     transition: transform .05s;
     cursor: pointer;
