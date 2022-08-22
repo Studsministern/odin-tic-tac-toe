@@ -127,6 +127,18 @@ main {
     transform: scale(1.1);
 }
 
+.player-icon {
+    height: var(--card-size);
+}
+
+.player-info.current > .player-icon {
+    content: url('../img/person_FILL1_wght400_GRAD0_opsz48.svg');
+}
+
+.player-info:not(.current) .player-icon {
+    content: url('../img/person_FILL0_wght400_GRAD0_opsz48.svg');
+}
+
 /* GameBoard */
 .gameBoard {
     grid-area: gameBoard;
