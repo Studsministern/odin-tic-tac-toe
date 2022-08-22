@@ -56,7 +56,6 @@
 body {
     min-height: 100vh;
     font: 16px black Helvetica, Verdana, sans-serif;
-    position: relative;
     display: flex;
     background: var(--bg-color-main);
 }
@@ -65,7 +64,7 @@ body {
 
             /********** HEADER **********/
 header {
-    position: absolute;
+    position: fixed;
     inset: 0 0 auto 0;
     display: flex;
     justify-content: flex-start;
@@ -172,7 +171,7 @@ button.restart:active {
 
             /********** FOOTER **********/
 footer {
-    position: absolute;
+    position: fixed;
     inset: auto 0 0 0;
     padding: var(--header-footer-padding);
     display: flex;
