@@ -42,8 +42,8 @@ const displayController = (() => { // displayController module
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
     let _currentPlayer = _player1;
-    const _player1Text = document.querySelector('.player-info.player1');
-    const _player2Text = document.querySelector('.player-info.player2');
+    const _player1Div = document.querySelector('.player-info.player1');
+    const _player2Div = document.querySelector('.player-info.player2');
     const _htmlBoard = document.querySelector('.gameBoard');
 
     const _init = (() => { // Initiates eventListeners for cards and restart button
@@ -68,11 +68,11 @@ const displayController = (() => { // displayController module
     
     const _updatePlayerText = () => {
         if(_currentPlayer === _player1) {
-            _player1Text.classList.add('current');
-            _player2Text.classList.remove('current');
+            _player1Div.classList.add('current');
+            _player2Div.classList.remove('current');
         } else {
-            _player1Text.classList.remove('current');
-            _player2Text.classList.add('current');
+            _player1Div.classList.remove('current');
+            _player2Div.classList.add('current');
         }
     }
     
