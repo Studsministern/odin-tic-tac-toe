@@ -105,30 +105,29 @@ main {
     gap: 1.5rem;
 }
 
+/* Players */
 .player-info {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     font-size: 1.5rem;
 }
 
 .player1 {
     grid-area: player1;
-    align-items: flex-end;
-    text-align: end;
 }
 
 .player2 {
     grid-area: player2;
-    align-items: flex-start;
-    text-align: start;
 }
 
-.current {
+.current p {
     font-weight: bold;
     transform: scale(1.1);
 }
 
+/* GameBoard */
 .gameBoard {
     grid-area: gameBoard;
     display: grid;
