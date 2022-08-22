@@ -42,8 +42,8 @@ const displayController = (() => { // displayController module
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
     let _currentPlayer = _player1;
-    const _player1Text = document.querySelector('.player1-info');
-    const _player2Text = document.querySelector('.player2-info');
+    const _player1Text = document.querySelector('.player-info.player1');
+    const _player2Text = document.querySelector('.player-info.player2');
     const _htmlBoard = document.querySelector('.gameBoard');
 
     const _init = (() => { // Initiates eventListeners for cards and restart button
