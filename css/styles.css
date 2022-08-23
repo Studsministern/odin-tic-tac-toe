@@ -122,21 +122,30 @@ main {
     grid-area: player2;
 }
 
-.current p {
+.player-info p {
+    transition: transform .5s;
+}
+
+.player-info.current p {
     font-weight: bold;
     transform: scale(1.1);
+    transition: transform .3s;
 }
 
 .player-icon {
     height: var(--card-size);
+    width: var(--card-size);
+    transition: all .3s;
 }
 
 .player-info.current > .player-icon {
-    content: url('../img/person_FILL1_wght400_GRAD0_opsz48.svg');
+    background: url('../img/person_FILL1_wght400_GRAD0_opsz48.svg') no-repeat;
+    background-size: contain;
 }
 
 .player-info:not(.current) .player-icon {
-    content: url('../img/person_FILL0_wght400_GRAD0_opsz48.svg');
+    background: url('../img/person_FILL0_wght400_GRAD0_opsz48.svg') no-repeat;
+    background-size: contain;
 }
 
 /* GameBoard */
