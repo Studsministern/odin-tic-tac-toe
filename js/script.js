@@ -45,6 +45,8 @@ const displayController = (() => { // displayController module
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
     let _currentPlayer = _player1;    
+
+    const _tieDiv = document.querySelector('.tie');
     const _player1Div = document.querySelector('.player-info.player1');
     const _player2Div = document.querySelector('.player-info.player2');
     const _htmlBoard = document.querySelector('.gameBoard');
@@ -148,13 +150,14 @@ const displayController = (() => { // displayController module
     }
 
     const _tie = () => {
-        console.log('It is a tie!');
+        _tieDiv.classList.remove('hidden');
     }
 
     const reset = () => {
         for(let i = 0; i <= 8; i++) {
             gameBoard.clearField(i);
         }
+        _tieDiv.classList.add('hidden');
         _player1Div.querySelector('.winner').classList.add('hidden');
         _player2Div.querySelector('.winner').classList.add('hidden');
         _htmlBoard.classList.remove('game-over');
