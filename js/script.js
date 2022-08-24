@@ -28,12 +28,15 @@ const gameBoard = ((_htmlBoard) => { // gameBoard module
         card.classList.remove('winCard');
         card.classList.remove('filled');
         card.textContent = '';
-    }    
+    }
 
+    const isFull = () => !(_board.includes(undefined));
+    
     return {
         getField,
         setField,
-        clearField
+        clearField,
+        isFull
     };    
 })(document.querySelector('.gameBoard'));    
 
@@ -41,7 +44,7 @@ const displayController = (() => { // displayController module
     let _winner;
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
-    let _currentPlayer = _player1;
+    let _currentPlayer = _player1;    
     const _player1Div = document.querySelector('.player-info.player1');
     const _player2Div = document.querySelector('.player-info.player2');
     const _htmlBoard = document.querySelector('.gameBoard');
@@ -53,6 +56,7 @@ const displayController = (() => { // displayController module
                 
                 if(_winner === undefined && gameBoard.setField(index, _currentPlayer)) { // Checks so something was added to the card
                     if(checkWinner(Math.floor(index / 3), index % 3)) _win();
+                    else if(gameBoard.isFull())                       _tie();                                            
                     else                                              _switchPlayer();
                 }
             });
@@ -141,6 +145,10 @@ const displayController = (() => { // displayController module
             _player2Div.querySelector('.winner').classList.remove('hidden');
         }
         _htmlBoard.classList.add('game-over');
+    }
+
+    const _tie = () => {
+        console.log('It is a tie!');
     }
 
     const reset = () => {
