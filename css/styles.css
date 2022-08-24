@@ -226,3 +226,8 @@ button {
     border: none;
     cursor: pointer;
 }
+
+/* Common styling */
+.hidden {
+    visibility: hidden;
+}

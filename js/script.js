@@ -135,7 +135,11 @@ const displayController = (() => { // displayController module
     }
 
     const _win = () => {
-        console.log(`${(_winner === _player1) ? 'Player 1' : 'Player 2'} has won!`);
+        if(_winner === _player1) {
+            _player1Div.querySelector('.winner').classList.remove('hidden');
+        } else {
+            _player2Div.querySelector('.winner').classList.remove('hidden');
+        }
         _htmlBoard.classList.add('game-over');
     }
 
@@ -143,6 +147,8 @@ const displayController = (() => { // displayController module
         for(let i = 0; i <= 8; i++) {
             gameBoard.clearField(i);
         }
+        _player1Div.querySelector('.winner').classList.add('hidden');
+        _player2Div.querySelector('.winner').classList.add('hidden');
         _htmlBoard.classList.remove('game-over');
         _currentPlayer = _player1;
         _winner = undefined;
