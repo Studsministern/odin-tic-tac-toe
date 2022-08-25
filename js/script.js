@@ -51,12 +51,12 @@ const displayController = ((_htmlGameDiv) => { // displayController module
     const _player2Div = _htmlGameDiv.querySelector('.player-info.player2');
     const _htmlBoard = _htmlGameDiv.querySelector('.gameBoard');
 
-    const _switchPlayer = () => {
+    const _switchCurrentPlayer = () => {
         _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1; 
         _updatePlayerText();
     };
 
-    const _randomizePlayer = () => {
+    const _randomizeCurrentPlayer = () => {
         _currentPlayer = (Math.random() > 0.5) ? _player1 : _player2;
         _updatePlayerText();
     }
@@ -155,12 +155,12 @@ const displayController = ((_htmlGameDiv) => { // displayController module
         _player1Div.querySelector('.winner').classList.add('hidden');
         _player2Div.querySelector('.winner').classList.add('hidden');
         _htmlBoard.classList.remove('game-over');
-        _randomizePlayer();
+        _randomizeCurrentPlayer();
         _winner = undefined;
     }
 
     const _init = (() => { // Initiates eventListeners for cards and restart button
-        _randomizePlayer();
+        _randomizeCurrentPlayer();
 
         _htmlBoard.querySelectorAll('.card').forEach(card => {
             card.addEventListener('click', () => {
@@ -169,7 +169,7 @@ const displayController = ((_htmlGameDiv) => { // displayController module
                 if(_winner === undefined && gameBoard.setField(index, _currentPlayer)) { // Checks so something was added to the card
                     if(checkWinner(Math.floor(index / 3), index % 3)) _win();
                     else if(gameBoard.isFull())                       _tie();                                            
-                    else                                              _switchPlayer();
+                    else                                              _switchCurrentPlayer();
                 }
             });
         });
