@@ -106,10 +106,14 @@ const displayController = ((_htmlGameDiv) => { // displayController module
             return false;                                          // is checked in the column from top left to bottom right
         }
 
-        if(row === col) {                   // Same index => Diagonal from top left to bottom right
-            return _checkFields(0, 8, 4);   // 0 = top left, 4 = middle, 8 bottom right
-        } else {                            // Different index => Diagonal from top right to bottom left
-            return _checkFields(2, 6, 2);   // 2 = top right, 4 = middle, 6 bottom left
+        if(row === 1 && col === 1) {               // Middle index =>
+            const dia1Win = _checkFields(0, 8, 4); // Top left to bottom right
+            const dia2Win = _checkFields(2, 6, 2); // Top right to bottom left
+            return dia1Win || dia2Win;
+        } else if(row === col) {                   // Same index =>
+            return _checkFields(0, 8, 4);          // Top left to bottom right
+        } else {                                   // Different index =>
+            return _checkFields(2, 6, 2);          // Top right to bottom left
         }
     }
 
