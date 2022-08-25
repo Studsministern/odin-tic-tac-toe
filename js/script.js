@@ -51,6 +51,9 @@ const displayController = ((_htmlGameDiv) => { // displayController module
     const _player2Div = _htmlGameDiv.querySelector('.player-info.player2');
     const _htmlBoard = _htmlGameDiv.querySelector('.gameBoard');
 
+    const getPlayer1 = () => _player1;
+    const getPlayer2 = () => _player2;
+
     const _switchCurrentPlayer = () => {
         _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1; 
         _updatePlayerText();
@@ -70,9 +73,6 @@ const displayController = ((_htmlGameDiv) => { // displayController module
             _player2Div.classList.add('current');
         }
     }
-    
-    const getPlayer1 = () => _player1;
-    const getPlayer2 = () => _player2;
 
     const checkWinner = (row, col) => {
         const rowWin = _checkRow(row);
