@@ -155,6 +155,7 @@ const displayController = ((_htmlGameDiv) => { // displayController module
 
     const _tie = () => {
         _tieDiv.classList.remove('hidden');
+        _htmlBoard.classList.add('game-over');
     }
 
     const reset = () => {
