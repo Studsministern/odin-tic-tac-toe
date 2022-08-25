@@ -19,6 +19,10 @@
 
     --bg-color-main: #FFF;
     --bg-color-secondary: rgb(236, 236, 236);
+    --bg-color-pulse: rgb(251, 224, 168);
+
+    --pulse-duration: 1s;
+    --pulse-repetitions: infinite;
 }
 
 /* Global reset */
@@ -189,6 +193,10 @@ main {
     transform: scale(1);
 }
 
+.winCard {
+    animation: pulse var(--pulse-duration) var(--pulse-repetitions) alternate ease-in-out;
+}
+
 /* Restart button */
 .restart-button-div {
     grid-area: restart;
@@ -211,6 +219,11 @@ button.restart:active {
     transform: scale(1);
 }
 
+.gameBoard.game-over ~ .restart-button-div button.restart {
+    animation: pulse calc(var(--pulse-duration) * 3) ease-in-out;
+    background: var(--bg-color-pulse);
+}
+
 
 
             /********** FOOTER **********/
@@ -221,6 +234,24 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+
+
+            /*****************************
+            
+                      ANIMATION:
+
+            *****************************/
+
+@keyframes pulse {
+    0% {
+        background: var(--bg-color-secondary);
+    }
+
+    100% {
+        background: var(--bg-color-pulse);
+    }
 }
 
 
