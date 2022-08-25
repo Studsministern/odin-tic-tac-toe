@@ -41,36 +41,25 @@ const gameBoard = ((_htmlBoard) => { // gameBoard module
 })(document.querySelector('.gameBoard'));    
 
 const displayController = ((_htmlGameDiv) => { // displayController module
-    let _winner;
     const _player1 = Object.create(Player('X'));
     const _player2 = Object.create(Player('O'));
-    let _currentPlayer = _player1;    
+    let _currentPlayer;
+    let _winner;
 
     const _tieDiv = _htmlGameDiv.querySelector('.tie');
     const _player1Div = _htmlGameDiv.querySelector('.player-info.player1');
     const _player2Div = _htmlGameDiv.querySelector('.player-info.player2');
     const _htmlBoard = _htmlGameDiv.querySelector('.gameBoard');
 
-    const _init = (() => { // Initiates eventListeners for cards and restart button
-        _htmlBoard.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('click', () => {
-                const index = card.dataset.index;
-                
-                if(_winner === undefined && gameBoard.setField(index, _currentPlayer)) { // Checks so something was added to the card
-                    if(checkWinner(Math.floor(index / 3), index % 3)) _win();
-                    else if(gameBoard.isFull())                       _tie();                                            
-                    else                                              _switchPlayer();
-                }
-            });
-        });
-
-        _htmlGameDiv.querySelector('button.restart').addEventListener('click', () => reset());
-    })();
-
     const _switchPlayer = () => {
         _currentPlayer = (_currentPlayer === _player1) ? _player2 : _player1; 
         _updatePlayerText();
     };
+
+    const _randomizePlayer = () => {
+        _currentPlayer = (Math.random() > 0.5) ? _player1 : _player2;
+        _updatePlayerText();
+    }
     
     const _updatePlayerText = () => {
         if(_currentPlayer === _player1) {
@@ -166,10 +155,27 @@ const displayController = ((_htmlGameDiv) => { // displayController module
         _player1Div.querySelector('.winner').classList.add('hidden');
         _player2Div.querySelector('.winner').classList.add('hidden');
         _htmlBoard.classList.remove('game-over');
-        _currentPlayer = _player1;
+        _randomizePlayer();
         _winner = undefined;
-        _updatePlayerText();
     }
+
+    const _init = (() => { // Initiates eventListeners for cards and restart button
+        _randomizePlayer();
+
+        _htmlBoard.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('click', () => {
+                const index = card.dataset.index;
+                
+                if(_winner === undefined && gameBoard.setField(index, _currentPlayer)) { // Checks so something was added to the card
+                    if(checkWinner(Math.floor(index / 3), index % 3)) _win();
+                    else if(gameBoard.isFull())                       _tie();                                            
+                    else                                              _switchPlayer();
+                }
+            });
+        });
+
+        _htmlGameDiv.querySelector('button.restart').addEventListener('click', () => reset());
+    })();
 
     return {
         getPlayer1,
